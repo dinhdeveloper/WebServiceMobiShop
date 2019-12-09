@@ -23,7 +23,7 @@ public class ProductController {
         return productService.getAllProduct();
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable("id") Integer id) {
         Optional<Product> optional = productService.getfindById(id);
         if (!optional.isPresent()) {
