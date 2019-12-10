@@ -21,6 +21,7 @@ public class ProductService {
         return proRes.findById(id);
     }
     public void save(Product product){
+
         proRes.save(product);
     }
     public void remove(Product product){

@@ -1,5 +1,6 @@
 package com.main.controller;
 
+import com.main.MobiShopUtil;
 import com.main.model.Product;
 import com.main.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    private String URL_LOCAL = MobiShopUtil.getBaseUrl();
 
     @GetMapping("/list")
     public List<Product> getAll() {
@@ -33,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product, UriComponentsBuilder builder) {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         productService.save(product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
@@ -50,7 +52,7 @@ public class ProductController {
         currentPro.get().setDescription(product.getDescription());
         currentPro.get().setPercentSale(product.getPercentSale());
         currentPro.get().setPriceSale(product.getPriceSale());
-        currentPro.get().setProductImage(product.getProductImage());
+        currentPro.get().setProductImage(MobiShopUtil.getBaseUrl() + product.getProductImage());
         currentPro.get().setProductName(product.getProductName());
         currentPro.get().setProductPrice(product.getProductPrice());
         currentPro.get().setStatus(product.getStatus());
